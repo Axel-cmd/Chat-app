@@ -32,7 +32,6 @@ export async function getUsersHandler(req: Request, res: Response) {
     let users = [];
 
     if(userId) {
-        console.log(userId)
         const user = await findUser({_id: userId});
         users.push(user);
     }
