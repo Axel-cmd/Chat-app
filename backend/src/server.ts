@@ -1,7 +1,7 @@
 import express from "express";
 import config from "config"; 
 import dbConnect from "./db/connect";
-
+import routes from "./routes";
 const PORT: number = config.get("port");
 const HOST: string = config.get("host");
 
@@ -15,6 +15,6 @@ app.listen(PORT, HOST, async () => {
 
     // connexion à la bdd 
     dbConnect();
-
-
+    // ajout des routes
+    routes(app)
 })
