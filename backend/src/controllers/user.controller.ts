@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { omit, get } from "lodash";
+import { omit } from "lodash";
 import { createUser, findUser, findUsers } from "../services/user.service";
 
 

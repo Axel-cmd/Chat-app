@@ -1,6 +1,18 @@
 import './App.css';
+import { useEffect } from 'react'
+import io from "socket.io-client";
+
+const socket = io();
 
 function App() {
+
+  useEffect(() => {
+    socket.on('connect', () => {
+      console.log('connected')
+    })
+
+  }, [])
+
   return (
     <div className="App">
       <header className="App-header">
