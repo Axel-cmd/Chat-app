@@ -4,16 +4,14 @@ import { UserDocument } from "./user.model";
 
 
 export interface ConversationDocument extends mongoose.Document {
-    participants: Array<UserDocument["_id"]>
-    messages: Array<Message>,
+    members: Array<UserDocument["_id"]>
     createdAt: Date,
     updatedAt: Date,
 }
 
 const ConversationSchema: mongoose.Schema = new mongoose.Schema( 
     {
-        participants: {type: [mongoose.Schema.Types.ObjectId], ref: "User", required: true},
-        messages: {type: [MessageSchema], ref: "Messages"}
+        members: {type: [mongoose.Schema.Types.ObjectId], ref: "User", required: true},
     }
 )
 

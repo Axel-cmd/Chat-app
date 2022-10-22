@@ -10,14 +10,11 @@ const deserializeUser = async (
     next: NextFunction
 ) => {
 
-    console.log("request")
-
     //on récupère le token dans l'en-tête de la requête et on le met dans le headers.authorization
     const accessToken = get(req, "headers.authorization", "").replace(
         /^Bearer\s/,
         ""
     );
-
 
     //header custom dans lequel on récupère le refreshtoken
     const refreshToken = get(req, "headers.x-refresh");
