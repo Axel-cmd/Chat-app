@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { Message, MessageSchema } from "./message.model";
 import { UserDocument } from "./user.model";
 
 

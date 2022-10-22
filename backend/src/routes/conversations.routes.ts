@@ -6,9 +6,10 @@ import { createConversationSchema } from "../schemas/conversation.schema";
 
 const router = Router();
 
+// créer une nouvelle conversation 
 router.post('/', [requiresUser, validateRequest(createConversationSchema)], createConversationsHandler)
 
-// get conversations of connectedUser
+// récupérer les conversation de l'utilisateur connecté 
 router.get('/', requiresUser, getConversationsHandler);
 
 export default router;

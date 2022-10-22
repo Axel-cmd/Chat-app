@@ -1,4 +1,4 @@
-import { object, string, ref, array } from "yup";
+import { object, string, array } from "yup";
 
 export const createConversationSchema = object({
     body: object({
