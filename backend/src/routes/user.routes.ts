@@ -1,23 +1,20 @@
-import { Request, Response, Router } from "express";
+import { Router } from "express";
 import { getUsersHandler, createUserHandler } from "../controllers/user.controller";
+import requiresUser from "../middleware/requiresUser";
 import validateRequest from "../middleware/validateRequest";
 import { createUserSchema } from "../schemas/user.schema";
 
 const router = Router();
 
-/********CRUD USER ********/  
-
-router.get("/:id?", getUsersHandler);
-
+// POST create user /users/
 router.post("/", validateRequest(createUserSchema), createUserHandler)
 
-router.put("/:id", (req: Request, res: Response) => {
-    
-})
+// GET one or many user(s) /users/:id
+router.get("/:id?", requiresUser , getUsersHandler);
 
-router.delete("/users", (req: Request, res: Response) => {
-    
-})
+// router.put("/:id")
+
+// router.delete("/users")
 
 
 export default router;

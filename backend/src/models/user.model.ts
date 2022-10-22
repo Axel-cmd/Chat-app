@@ -61,6 +61,20 @@ UserSchema.pre("findOneAndUpdate", async function (this,next) {
     this.setUpdate(update);
 })
 
+/**
+ * utilisé pour la connexion
+ * @param passwordEntered le mot de passe à comparer 
+ * @returns 
+ */
+ UserSchema.methods.comparePassword = async function(passwordEntered: string): Promise<boolean> {
+    const user = this as UserDocument;
+
+    //compare le mot de passe entré avec celui de l'utilisateur et renvoie un booleen
+    return bcrypt.compare(passwordEntered, user.password).catch((e) => false);
+}
+
+
+
 const User = mongoose.model<UserDocument>("User", UserSchema);
 
 export default User;

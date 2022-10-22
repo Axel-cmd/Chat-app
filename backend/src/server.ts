@@ -5,7 +5,8 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 import socket from "./socket";
 import userRouter from "./routes/user.routes";
-
+import sessionRouter from "./routes/session.routes";
+import deserializeUser from "./middleware/deserializeUser";
 
 // récupérer les informations pour initialiser le serveur
 const PORT: number = config.get("port");
@@ -13,15 +14,17 @@ const HOST: string = config.get("host");
 
 const app = express();
 const server = createServer(app);
-const io = new Server(server)
+const io = new Server(server);
 
+app.use(deserializeUser);
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 // méthode pour la socket 
 socket(io);
 
-app.use('/users', userRouter)
+app.use('/users', userRouter);
+app.use('/sessions', sessionRouter);
 
 app.listen(PORT, HOST, async () => {
     console.log(`Server running at http://${HOST}:${PORT}`);
