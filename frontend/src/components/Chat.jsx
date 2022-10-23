@@ -3,6 +3,7 @@ import { useState } from "react";
 import { authRequest } from "../utils/request";
 import BottomChat from "./BottomChat";
 import { Grid, Stack } from '@mui/material'
+import Message from "./Message";
 
 const Chat = ({conversation, friend}) => {
     
@@ -35,13 +36,14 @@ const Chat = ({conversation, friend}) => {
         <Grid container className="chat-container">
             <Grid item xs={12} className="messages-container" >
                 {messages.map( (message, index) => (
-                    <div key={index}>
-                        <p>{message.content}</p>
-                    </div>
+                    // <div key={index}>
+                    //     <p>{message.content}</p>
+                    // </div>
+                    <Message key={index} message={message} own={message.author !== friend._id} />
                 ))}
             </Grid>
             <Grid item xs={12} className="bottom-container">
-                <BottomChat />
+                <BottomChat conversationId={conversation._id} />
             </Grid>
         </Grid>
     )

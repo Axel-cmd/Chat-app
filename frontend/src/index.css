@@ -56,6 +56,7 @@ code {
 
 .messages-container {
   height: 80%;
+  padding: 2%;
 }
 
 .bottom-container {
@@ -68,5 +69,43 @@ code {
   margin-right: 2%;
 }
 
-/* .button-send-message {
-} */
+/* message style */
+
+.message {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  /* width: 100%; */
+}
+
+
+.messageTop{
+  display: flex;
+}
+
+.messageImg {
+  width: 32px;
+  height: 32px;
+  margin-right: 10px;
+}
+
+.messageContent{
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #1877f2;
+  color: white;
+  max-width: 300px;
+}
+
+.messageTimeAgo{
+  font-size: 12px;
+}
+
+.message.own{
+  align-items: flex-end;
+}
+
+.message.own .messageContent{
+  background-color: rgb(245, 241, 241);
+  color: black;
+}
