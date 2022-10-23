@@ -5,7 +5,7 @@ import { authRequest } from "../utils/request";
 import { useState } from "react";
 import ConversationItem from "./ConversationItem";
 
-const DrawerContent = () => {
+const DrawerContent = ({ handleChangeChat }) => {
 
     const auth = useAuth();
 
@@ -31,7 +31,7 @@ const DrawerContent = () => {
 
             <List>
                 {conversations.map((conv, index) => (
-                    <ConversationItem key={index} conversation={conv} currentUserId={auth.user._id} index={index} />
+                    <ConversationItem key={index} conversation={conv} currentUserId={auth.user._id} index={index} handleChangeChat={handleChangeChat} />
                 ))}
             </List>
 

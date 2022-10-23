@@ -4,10 +4,18 @@ import { authRequest } from "../utils/request";
 import { ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { AccountCircle } from '@mui/icons-material'
 
-const ConversationItem = ({ conversation, currentUserId, index }) => {
+const ConversationItem = ({ conversation, currentUserId, index, handleChangeChat }) => {
 
 
-    const [user, setUser] = useState()
+    const [friend, setFriend] = useState()
+
+
+    const handleClickItem = () => {
+        handleChangeChat({
+            conversation,
+            friend
+        })
+    }
 
     useEffect(() => {
         
@@ -22,7 +30,7 @@ const ConversationItem = ({ conversation, currentUserId, index }) => {
             })
             .then(res => res.json())
             .then(result => {
-                setUser(result[0])
+                setFriend(result[0])
                 console.log(result)
             })
 
@@ -30,12 +38,12 @@ const ConversationItem = ({ conversation, currentUserId, index }) => {
     }, [conversation, currentUserId])
 
     return(
-        <ListItem key={index} disablePadding>
+        <ListItem key={index} disablePadding onClick={handleClickItem}>
             <ListItemButton>
                 <ListItemIcon>
                     <AccountCircle/>
                 </ListItemIcon>
-                <ListItemText primary={user ? user.username : ""} />
+                <ListItemText primary={friend ? friend.username : ""} />
             </ListItemButton>
         </ListItem>
     )
