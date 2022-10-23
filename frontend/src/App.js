@@ -1,34 +1,31 @@
 import './App.css';
-import { useEffect } from 'react'
-import io from "socket.io-client";
-
-const socket = io();
+import { BrowserRouter, Outlet, Routes, Route, useNavigate } from "react-router-dom";
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Home from './pages/Home';
+import RequireAuth from './components/RequireAuth';
+import { AuthProvider } from './contexts/auth.context';
 
 function App() {
 
-  useEffect(() => {
-    socket.on('connect', () => {
-      console.log('connected')
-    })
-
-  }, [])
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<Login />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/home' element={
+            <RequireAuth>
+              <Home />
+            </RequireAuth>
+          }/>
+        </Routes>
+      
+        <Outlet />
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 

@@ -9,6 +9,7 @@ import sessionRouter from "./routes/session.routes";
 import conversationsRouter from "./routes/conversations.routes";
 import deserializeUser from "./middleware/deserializeUser";
 import messagesRouter from './routes/messages.routes';
+import cors from 'cors';
 
 // récupérer les informations pour initialiser le serveur
 const PORT: number = config.get("port");
@@ -20,6 +21,9 @@ const io = new Server(server);
 
 app.use(deserializeUser);
 app.use(express.json());
+app.use(cors({
+    origin: '*'
+}))
 app.use(express.urlencoded({extended: false}));
 
 // méthode pour la socket 

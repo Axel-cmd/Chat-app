@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { omit } from "lodash";
+import { omit, get } from "lodash";
 import { createUser, findUser, findUsers } from "../services/user.service";
 
 
@@ -40,4 +40,15 @@ export async function getUsersHandler(req: Request, res: Response) {
     }
     if(!users.length) return res.sendStatus(404);
     return res.send(users.map(user => omit(user, "password")));
+}
+
+export async function getCurrentUserHandler(req: Request, res: Response) {
+    
+    const currentUserId = get(req, 'user._id');
+
+    const user = await findUser({_id: currentUserId});
+
+    if(!user) return res.sendStatus(404);
+
+    return res.send(user);
 }
