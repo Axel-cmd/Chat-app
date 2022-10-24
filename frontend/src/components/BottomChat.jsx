@@ -4,7 +4,7 @@ import { useAuth } from "../contexts/auth.context";
 import { authRequest } from "../utils/request";
 
 
-const BottomChat = ({conversationId, updateMessages}) => {
+const BottomChat = ({conversationId, updateMessages, sendMessageOnSocket}) => {
 
     const auth = useAuth();
     const [message, setMessage] = useState('');
@@ -18,6 +18,8 @@ const BottomChat = ({conversationId, updateMessages}) => {
             author: auth.user._id,
             conversationId,
         }
+        sendMessageOnSocket(message);
+
         setMessage("")
 
         authRequest({
@@ -30,10 +32,12 @@ const BottomChat = ({conversationId, updateMessages}) => {
             console.log(result);
             updateMessages(result)
         })
+
+
     }
 
     return (
-        <Stack spacing={5} className='bottom-chat' direction='horizontal' >
+        <Stack spacing={5} className='bottom-chat' direction='row' >
             <TextField 
                 className="input-new-message"
                 id="outlined-multiline-flexible"

@@ -33,9 +33,9 @@ const DrawerContent = ({ handleChangeChat }) => {
         })
         .then(res => res.json())
         .then(result => {
-            const others = result.filter( r => !auth.user.friends.includes(r._id) )
+            const others = result.filter( r => !auth.user.friends.includes(r._id) && r._id !== auth.user._id)
             setOtherUsers(others)
-            console.log(others)
+            // console.log(others)
         })
     }, [auth])
 

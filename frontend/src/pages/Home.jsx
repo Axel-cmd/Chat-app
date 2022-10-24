@@ -13,7 +13,7 @@ const Home = ( ) => {
     const [currentConversation, setCurrentConversation] = useState();
 
     const handleChangeChat = ({conversation, friend}) => {
-        console.log("handleChagn")
+        // console.log("handleChagn")
         setCurrentConversation(conversation);
         setCurrentFriend(friend)
     }
