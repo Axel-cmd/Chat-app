@@ -14,6 +14,7 @@ const Chat = ({conversation, friend}) => {
     const [messages, setMessages] = useState([]);
     const [arrivalMessage, setArrivalMessage] = useState(null);
     
+    const scrollRef = useRef();
     const socket = useRef();
 
     const updateMessages = (message) => {
@@ -74,6 +75,9 @@ const Chat = ({conversation, friend}) => {
         }
     }, [conversation])
 
+    useEffect(() => {
+        scrollRef.current?.scrollIntoView({behavior : 'smooth'})
+    }, [messages])
 
     if(!conversation || !friend){
         return <p className="no-chat-selected" >Pas de chat sélectionné</p>
@@ -83,8 +87,9 @@ const Chat = ({conversation, friend}) => {
         <Grid container className="chat-container">
             <Grid item xs={12} className="messages-container" >
                 {messages.map( (message, index) => (
-                    
-                    <Message key={index} message={message} own={message.author !== friend._id} />
+                    <div ref={scrollRef}>
+                        <Message key={index} message={message} own={message.author !== friend._id} />
+                    </div>
                 ))}
             </Grid>
             <Grid item xs={12} className="bottom-container">

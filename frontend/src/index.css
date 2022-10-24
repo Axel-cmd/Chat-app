@@ -57,6 +57,7 @@ code {
 .messages-container {
   height: 80%;
   padding: 2%;
+  overflow: auto;
 }
 
 .bottom-container {
