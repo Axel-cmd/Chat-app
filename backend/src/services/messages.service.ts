@@ -12,7 +12,7 @@ export async function createMessages(userInput: DocumentDefinition<MessagesDocum
 }
 
 export async function findMessages(query: FilterQuery<MessagesDocument>) {
-    return Messages.findOne(query).lean();
+    return Messages.find(query).lean();
 }
 
 export async function updateMessages(query: FilterQuery<MessagesDocument>, update: DocumentDefinition<MessagesDocument>) {

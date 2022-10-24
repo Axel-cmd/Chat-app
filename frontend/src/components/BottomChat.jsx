@@ -4,7 +4,7 @@ import { useAuth } from "../contexts/auth.context";
 import { authRequest } from "../utils/request";
 
 
-const BottomChat = ({conversationId}) => {
+const BottomChat = ({conversationId, updateMessages}) => {
 
     const auth = useAuth();
     const [message, setMessage] = useState('');
@@ -12,17 +12,24 @@ const BottomChat = ({conversationId}) => {
     // méthode pour envoyer un message
 
     const handleSendMessage = () => {
-        // authRequest({
-        //     url: "/messages",
-        //     method: "POST",
-        //     body: {
-        //         content: message,
-        //         author: auth.user._id,
-        //         conversationId,
-        //     }
-        // })
-        // .then(res => res.json())
-        // .then(result => console.log(result))
+
+        const newMessage = {
+            content: message,
+            author: auth.user._id,
+            conversationId,
+        }
+        setMessage("")
+
+        authRequest({
+            url: "/messages",
+            method: "POST",
+            body: newMessage
+        })
+        .then(res => res.json())
+        .then(result => {
+            console.log(result);
+            updateMessages(result)
+        })
     }
 
     return (

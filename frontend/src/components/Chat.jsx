@@ -2,12 +2,16 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { authRequest } from "../utils/request";
 import BottomChat from "./BottomChat";
-import { Grid, Stack } from '@mui/material'
+import { Grid } from '@mui/material'
 import Message from "./Message";
 
 const Chat = ({conversation, friend}) => {
     
     const [messages, setMessages] = useState([]);
+
+    const updateMessages = (message) => {
+        setMessages([...messages, message])
+    }
 
     // récupérer les messages
     useEffect(() => {
@@ -18,10 +22,12 @@ const Chat = ({conversation, friend}) => {
             })
             .then(res => res.json())
             .then( result => {
-                console.log(result);
-                if(result.messages){
-                    console.log(result.messages[0].content)
-                    setMessages(result.messages)
+
+                if(result){
+                    setMessages(result)
+                    console.log(messages)
+                }else{
+                    setMessages([])
                 }
             })
         }
@@ -36,14 +42,12 @@ const Chat = ({conversation, friend}) => {
         <Grid container className="chat-container">
             <Grid item xs={12} className="messages-container" >
                 {messages.map( (message, index) => (
-                    // <div key={index}>
-                    //     <p>{message.content}</p>
-                    // </div>
+                    
                     <Message key={index} message={message} own={message.author !== friend._id} />
                 ))}
             </Grid>
             <Grid item xs={12} className="bottom-container">
-                <BottomChat conversationId={conversation._id} />
+                <BottomChat conversationId={conversation._id} updateMessages={updateMessages} />
             </Grid>
         </Grid>
     )
