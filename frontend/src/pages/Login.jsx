@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/auth.context";
-import { Button, Container, Paper, TextField } from "@mui/material"
+import { Button, Container, Paper, TextField, Typography } from "@mui/material"
 import { useEffect } from "react";
 import { authRequest } from "../utils/request";
 
 const Login = () => {
 
+    const [error, setError] = useState(false)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('')
 
@@ -15,7 +16,13 @@ const Login = () => {
 
     const handleLogin = () => {
         auth.login({email, password}).then( () => {
+            setError(false)
             navigate("/home", {replace: true});
+        })
+        .catch(err => {
+            setError(true)
+            setEmail('');
+            setPassword('')
         })
     }
 
@@ -73,6 +80,12 @@ const Login = () => {
                 <Button variant="contained" onClick={handleLogin} >
                     Connexion
                 </Button>
+                <Button variant="contained" onClick={() => navigate('/register')} >
+                    Créer un compte
+                </Button>
+                {error && (
+                    <Typography style={{color: 'tomato'}} >Email ou mot de passe invalide !</Typography>
+                )}
             </Paper>
         </Container>
     )

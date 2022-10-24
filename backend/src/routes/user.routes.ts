@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { getUsersHandler, createUserHandler, getCurrentUserHandler } from "../controllers/user.controller";
+import { getUsersHandler, createUserHandler, getCurrentUserHandler, updateUserHandler, deleteUserHandler } from "../controllers/user.controller";
 import requiresUser from "../middleware/requiresUser";
 import validateRequest from "../middleware/validateRequest";
-import { createUserSchema } from "../schemas/user.schema";
+import { createUserSchema, updateUserSchema } from "../schemas/user.schema";
 
 const router = Router();
 
@@ -14,9 +14,9 @@ router.get('/current', requiresUser, getCurrentUserHandler);
 // GET one or many user(s) /users/:id
 router.get("/:id?", requiresUser , getUsersHandler);
 
-// router.put("/:id")
+router.put("/:id", [requiresUser, validateRequest(updateUserSchema)], updateUserHandler);
 
-// router.delete("/users")
+router.delete("/:id", requiresUser, deleteUserHandler);
 
 
 export default router;

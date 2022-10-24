@@ -2,14 +2,13 @@ import mongoose, { mongo } from "mongoose";
 import bcrypt from "bcrypt";
 import config from "config";
 import { ConversationDocument } from "./conversation.model";
-import { FriendDocument, FriendSchema } from "./friends.model";
 
 
 export interface UserDocument extends mongoose.Document {
     username: string,
     email: string,
     conversations: Array<ConversationDocument['_id']>,
-    friends: Array<FriendDocument>,
+    friends: Array<string>,
     password: string,
     createdAt: Date,
     updatedAt: Date,
@@ -22,7 +21,7 @@ const UserSchema: mongoose.Schema = new mongoose.Schema(
         email: { type: String, required: true, unique: true},
         password:{type: String, required: true},
         conversations: { type: [mongoose.Schema.Types.ObjectId], ref: 'Conversation'},
-        friends: { type: [FriendSchema], ref: "Friend" }
+        friends: { type: [mongoose.Schema.Types.ObjectId], ref: "Friend" }
     },
     {timestamps: true}
 )

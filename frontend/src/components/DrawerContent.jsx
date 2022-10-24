@@ -4,12 +4,14 @@ import { useAuth } from "../contexts/auth.context";
 import { authRequest } from "../utils/request";
 import { useState } from "react";
 import ConversationItem from "./ConversationItem";
+import AddUserItem from "./AddUserItem";
 
 const DrawerContent = ({ handleChangeChat }) => {
 
     const auth = useAuth();
 
     const [conversations, setConversations] = useState([]);
+    const [otherUsers, setOtherUsers] = useState([]);
 
     useEffect(() => {
 
@@ -24,6 +26,18 @@ const DrawerContent = ({ handleChangeChat }) => {
 
     }, [])
 
+    useEffect(() => {
+        authRequest({
+            method: 'GET',
+            url: '/users'
+        })
+        .then(res => res.json())
+        .then(result => {
+            const others = result.filter( r => !auth.user.friends.includes(r._id) )
+            setOtherUsers(others)
+            console.log(others)
+        })
+    }, [auth])
 
     return (
         <Box sx={{overflow: 'auto'}} >
@@ -32,6 +46,13 @@ const DrawerContent = ({ handleChangeChat }) => {
             <List>
                 {conversations.map((conv, index) => (
                     <ConversationItem key={index} conversation={conv} currentUserId={auth.user._id} index={index} handleChangeChat={handleChangeChat} />
+                ))}
+            </List>
+
+            <h3 style={{textAlign: 'center'}} >Other users</h3>
+            <List>
+                {otherUsers.map((otherUser, index) => (
+                    <AddUserItem key={index} index={index} user={otherUser} />
                 ))}
             </List>
 

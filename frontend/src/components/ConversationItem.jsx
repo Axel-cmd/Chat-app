@@ -21,7 +21,7 @@ const ConversationItem = ({ conversation, currentUserId, index, handleChangeChat
         
         // console.log(conversation)
         const friendId = conversation.members.find( m => m !== currentUserId)
-        console.log(currentUserId)
+        // console.log(currentUserId)
 
         if(friendId) {
             authRequest({
@@ -31,7 +31,7 @@ const ConversationItem = ({ conversation, currentUserId, index, handleChangeChat
             .then(res => res.json())
             .then(result => {
                 setFriend(result[0])
-                console.log(result)
+                // console.log(result)
             })
 
         }

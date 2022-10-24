@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { omit, get } from "lodash";
-import { createUser, findUser, findUsers } from "../services/user.service";
+import { createUser, deleteUser, findUser, findUsers, updateUser } from "../services/user.service";
 
 
 
@@ -51,4 +51,31 @@ export async function getCurrentUserHandler(req: Request, res: Response) {
     if(!user) return res.sendStatus(404);
 
     return res.send(user);
+}
+
+export async function updateUserHandler (req : Request, res: Response) {
+
+    //récupérer l'Id de l'utilisateur
+    const userId = get(req, "user._id");
+
+    //récupérer le contenu a modifié
+    const update = req.body;
+    
+    // modifier les informations de l'utilisateur puis récupérer les nouvelles informations
+    const user = await updateUser({_id: userId}, update, {new: true}); // new permet récupérer les dernières informations
+
+    //vérification de l'utilisateur 
+    if (!user) return res.sendStatus(404);
+    return res.send(omit(user.toJSON(), "password"));
+}
+
+export async function  deleteUserHandler (req : Request, res : Response) {
+    //récuper l'Id de l'utilisateur
+    const userId = get(req, "user._id");
+
+    //Suppresion de l'utilisateur
+    await deleteUser ({_id: userId}, {});
+
+    return res.sendStatus(200);
+    
 }

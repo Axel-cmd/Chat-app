@@ -2,8 +2,6 @@ import express from "express";
 import config from "config"; 
 import dbConnect from "./db/connect";
 import { createServer } from "http";
-import { Server } from "socket.io";
-import socket from "./socket";
 import userRouter from "./routes/user.routes";
 import sessionRouter from "./routes/session.routes";
 import conversationsRouter from "./routes/conversations.routes";
@@ -17,7 +15,6 @@ const HOST: string = config.get("host");
 
 const app = express();
 const server = createServer(app);
-const io = new Server(server);
 
 app.use(deserializeUser);
 app.use(express.json());
@@ -27,7 +24,6 @@ app.use(cors({
 app.use(express.urlencoded({extended: false}));
 
 // méthode pour la socket 
-socket(io);
 
 app.use('/users', userRouter);
 app.use('/sessions', sessionRouter);
