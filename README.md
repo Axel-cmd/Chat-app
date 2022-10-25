@@ -3,9 +3,9 @@
 
 ###### Le projet est divisé en 3 parties :
 
- **- API pour le backend**
- **- Frontend pour le siteweb**
- **- Socket pour la web socket**
+  - API pour le backend
+  - Frontend pour le siteweb
+  - Socket pour la communication temps réel
 
 ***Pour que l'application fonctionne il faut démarrer les 3 parties.***
 
