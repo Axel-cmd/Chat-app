@@ -1,7 +1,7 @@
 # Chat App
  Projet application de chat  pour le cours backend 
 
-######Le projet est divisé en 3 parties :
+###### Le projet est divisé en 3 parties :
 
  **- API pour le backend**
  **- Frontend pour le siteweb**
@@ -9,7 +9,7 @@
 
 ***Pour que l'application fonctionne il faut démarrer les 3 parties.***
 
-######Prérequis :
+###### Prérequis :
 
 **nodemon d'installer en global**
 ```
@@ -24,4 +24,22 @@ npm i -g nodemon
 npm i
 npm run dev
 
+```
+
+## Socket 
+
+> la socket tourne sur le port 4200 
+
+```
+npm i 
+npm run start 
+```
+
+## Frontend 
+
+> le frontend tourne sur le port 3000 
+
+```
+npm i 
+npm run start
 ```
