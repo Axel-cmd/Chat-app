@@ -30,6 +30,7 @@ const Chat = ({conversation, friend}) => {
         })
     }
 
+
     useEffect(() => {
         socket.current = io("ws://localhost:4200");
 

@@ -9,19 +9,6 @@ const AddUserItem = ({user, addNewConversation, index}) => {
     const auth = useAuth();
 
     const handleAddUser = () => {
-
-        // auth.user.friends.push(user._id); 
-        // console.log(auth.user.friends)
-        // authRequest({
-        //     method: 'PUT',
-        //     url: `/users/${auth.user._id}`,
-        //     body: {
-        //         friends: auth.user.friends
-        //     }
-        // })
-        // .then(res => res.json())
-        // .then(result => console.log(result))
-
         authRequest({
             method: 'POST',
             url: '/conversations',

@@ -40,7 +40,7 @@ io.on('connection', (socket) => {
 
     socket.on("startConversation", ({senderId, receiverId, conversationId}) => {
         const user = getUser(receiverId);
-        io.to(user.socketId).emit('getConversation', {
+        io.to(user.socketId).emit("getConversation", {
             senderId,
             conversationId
         })
