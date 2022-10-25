@@ -87,8 +87,8 @@ const Chat = ({conversation, friend}) => {
         <Grid container className="chat-container">
             <Grid item xs={12} className="messages-container" >
                 {messages.map( (message, index) => (
-                    <div ref={scrollRef}>
-                        <Message key={index} message={message} own={message.author !== friend._id} />
+                    <div ref={scrollRef} key={index}>
+                        <Message  message={message} own={message.author !== friend._id} />
                     </div>
                 ))}
             </Grid>
