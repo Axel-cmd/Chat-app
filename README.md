@@ -20,9 +20,19 @@ npm i -g nodemon
 
 ###### Prérequis pour le backend
 
-Dans le fichier config/default.ts :
- - lien vers la bdd dans le champs **dbUri**
- - clé privé RSA dans le champs **privateKey**
+ - Créer dans la racine du dossier backend un dossier nommé config
+ - Créer un fichier default.ts avec le code suivant 
+```
+export default {
+    port: 8080,
+    host: "localhost",
+    dbUri: "",
+    saltWorkFactor: 10,
+    accessTokenTtl: "15m",
+    refreshTokenTtl: "1y",
+    privateKey: ``,
+}
+```
 
 ```
 cd .\backend
