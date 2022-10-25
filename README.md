@@ -24,28 +24,27 @@ Dans le fichier config/default.ts :
  - lien vers la bdd dans le champs **dbUri**
  - clé privé RSA dans le champs **privateKey**
 
-> L'api tourne sur le port 8080 
-
 ```
+cd .\backend
 npm i
 npm run dev
-
 ```
+> L'api tourne sur le port 8080 
 
 ## Socket 
 
-> la socket tourne sur le port 4200 
 
 ```
+cd .\socket
 npm i 
 npm run start 
 ```
+> la socket tourne sur le port 4200 
 
 ## Frontend 
-
-> le frontend tourne sur le port 3000 
-
 ```
+cd .\frontend
 npm i 
 npm run start
 ```
+> le frontend tourne sur le port 3000 
