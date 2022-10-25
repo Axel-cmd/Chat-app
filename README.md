@@ -18,6 +18,12 @@ npm i -g nodemon
 
 ## API 
 
+###### Prérequis pour le backend
+
+Dans le fichier config/default.ts :
+ - lien vers la bdd dans le champs **dbUri**
+ - clé privé RSA dans le champs **privateKey**
+
 > L'api tourne sur le port 8080 
 
 ```
